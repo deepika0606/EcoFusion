@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoFusion | Waste to Product Designer</title>
+  <style>
+    /* 🎨 Eco-Innovative Theme */
+    :root {
+      --green: #27ae60;
+      --darkgreen: #145a32;
+      --blue: #2980b9;
+      --yellow: #f1c40f;
+      --white: #ffffff;
+      --gray: #f4f4f4;
+      --lightgreen: #e8f8f5;
+      --lightyellow: #fef9e7;
+      --lightblue: #d6eaf8;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--gray);
+      color: #333;
+      scroll-behavior: smooth;
+    }
+
+    /* Navbar */
+    header {
+      background: linear-gradient(90deg, var(--green), var(--blue));
+      color: var(--white);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    header h1 { margin: 0; font-size: 1.8rem; }
+    nav a {
+      color: var(--white);
+      margin-left: 18px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    nav a:hover { color: var(--yellow); }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 6rem 2rem;
+      background-image: url('image2.jpg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      position: relative;
+      color: white;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top:0; left:0; right:0; bottom:0;
+      background: rgba(0,0,0,0.4);
+    }
+    .hero h2, .hero p, .hero button {
+      position: relative;
+      z-index: 1;
+    }
+    .hero h2 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(90deg, var(--yellow), var(--green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: slideIn 1s ease forwards;
+    }
+    .hero p { font-size: 1.2rem; margin-bottom: 1rem; }
+    .hero button {
+      margin-top: 1rem;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      background: var(--yellow);
+      color: var(--darkgreen);
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .hero button:hover { background: var(--blue); color: var(--white); transform: scale(1.05); }
+
+    @keyframes slideIn {
+      0% { transform: translateY(-50px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Sections */
+    section { padding: 3rem 2rem; text-align: center; }
+    section h2 { font-size: 2.5rem; margin-bottom: 1.5rem; color: var(--darkgreen); position: relative; }
+    section h2::after {
+      content: '';
+      width: 60px;
+      height: 3px;
+      background: var(--green);
+      display: block;
+      margin: 8px auto 0;
+      border-radius: 2px;
+    }
+
+    /* About Section */
+    .about p {
+      font-size: 1.1rem;
+      color: #444;
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+    }
+    .about ul {
+      list-style: none;
+      padding: 0;
+      margin: 2rem auto;
+      max-width: 900px;
+      text-align: left;
+    }
+    .about ul li {
+      background: var(--white);
+      padding: 15px 20px;
+      margin-bottom: 15px;
+      border-left: 6px solid var(--green);
+      border-radius: 12px;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      color: #333;
+    }
+    .about ul li:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    .about ul li span {
+      font-size: 1.5rem;
+      margin-right: 12px;
+    }
+
+    /* Advantages Section */
+    .advantages {
+      background: linear-gradient(135deg, var(--lightgreen), var(--lightyellow));
+      padding: 4rem 2rem;
+    }
+    .adv-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .adv-box {
+      background: var(--white);
+      padding: 2rem 1.5rem;
+      border-radius: 20px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+    }
+    .adv-box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+      background: var(--lightgreen);
+    }
+    .adv-box img {
+      width: 70px;
+      margin-bottom: 1rem;
+    }
+    .adv-box h3 { font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--green); }
+    .adv-box p { font-size: 1rem; color: #555; line-height: 1.5; }
+
+    /* Features Section */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .feature {
+      background: var(--white);
+      padding: 2rem 1.5rem;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .feature:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+    }
+    .feature h3 { font-size: 1.3rem; margin-bottom: 1rem; color: var(--green); }
+    .feature p { font-size: 1rem; color: #555; line-height: 1.6; }
+
+    /* Examples Section */
+    .example-cards {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .card {
+      background: var(--white);
+      padding: 1.5rem;
+      width: 220px;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 12px 25px rgba(0,0,0,0.2); }
+    .card h4 { font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--green); }
+    .card p { font-size: 1rem; color: #555; }
+
+    /* Statistics Section */
+    section h2 { font-size: 2.5rem; margin-bottom: 1.5rem; color: var(--darkgreen); position: center };
+    .statistics {
+
+      background: var(--lightblue);
+      padding: 4rem 2rem;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+    .stat {
+      background: var(--white);
+      padding: 2rem 1.5rem;
+      border-radius: 20px;
+      width: 200px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .stat:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(0,0,0,0.2); }
+    .stat h3 { color: var(--green); font-size: 2rem; margin-bottom: 0.5rem; }
+    .stat p { font-size: 1rem; color: #555; }
+
+    /* CTA Section */
+    .cta {
+      background: var(--blue);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .cta button {
+      background: var(--yellow);
+      color: var(--darkgreen);
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .cta button:hover { background: var(--green); color: white; transform: scale(1.05); }
+
+    /* Footer */
+    footer {
+      background: var(--darkgreen);
+      color: var(--white);
+      text-align: center;
+      padding: 2rem;
+      font-size: 1rem;
+    }
+    footer a { color: var(--yellow); text-decoration: none; margin: 0 8px; transition: 0.3s; }
+    footer a:hover { color: var(--white); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h2 { font-size: 2.2rem; }
+      .hero p { font-size: 1rem; }
+      .cta button { font-size: 1rem; padding: 12px 20px; }
+      .statistics { flex-direction: column; align-items: center; }
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <h1>♻️ EcoFusion</h1>
+    <nav>
+        <a href="home.html">Home</a>
+      <a href="marketplace.html">Marketplace</a>
+      <a href="designer.html">Designer Studio</a>
+      <a href="impact.html">Impact</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <h2>Turn Waste Into Wonders 🌍</h2>
+    <p>Design | Innovate | Reuse | Build a Sustainable Future</p>
+    <button>Get Started</button>
+  </section>
+
+  <!-- About -->
+  <section class="about" id="about">
+    <h2>About Us</h2>
+    <p>EcoFusion transforms waste into sustainable, functional products. Empowering communities and creators to reduce waste while fostering eco-friendly innovation. 🌱♻️</p>
+    <ul>
+      <li><span>🌍</span><strong>Sustainability Focus:</strong> Promoting a circular economy by reusing waste.</li>
+      <li><span>🤖</span><strong>AI Innovation:</strong> Creative designs suggested by AI for upcycling.</li>
+      <li><span>👥</span><strong>Community Driven:</strong> Share knowledge and collaborate on projects.</li>
+      <li><span>🛒</span><strong>Eco-Bazaar Marketplace:</strong> Showcase and sell upcycled products.</li>
+      <li><span>💡</span><strong>Tutorials:</strong> Step-by-step DIY projects.</li>
+      <li><span>📈</span><strong>Impact Tracking:</strong> Measure waste reduction and community growth.</li>
+    </ul>
+  </section>
+
+  <!-- Advantages -->
+  <section class="advantages">
+    <h2>Why Choose EcoFusion?</h2>
+    <div class="adv-grid">
+      <div class="adv-box">
+        <img src="https://cdn-icons-png.flaticon.com/512/2974/2974088.png" alt="">
+        <h3>♻️ 500+ kg Waste Repurposed</h3>
+        <p>Giving new life to materials, reducing landfill dependency.</p>
+      </div>
+      <div class="adv-box">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="">
+        <h3>💡 200+ Creative Ideas</h3>
+        <p>AI-powered design suggestions and innovations.</p>
+      </div>
+      <div class="adv-box">
+        <img src="https://cdn-icons-png.flaticon.com/512/414/414974.png" alt="">
+        <h3>🌍 2 Tons CO₂ Saved</h3>
+        <p>Upcycling helps cut carbon emissions and fight climate change.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features" id="features">
+    <h2>Our Features</h2>
+    <div class="features-grid">
+      <div class="feature">
+        <h3>♻️ Waste Transformation</h3>
+        <p>Turn everyday waste into innovative and functional products.</p>
+      </div>
+      <div class="feature">
+        <h3>🤖 AI-Powered Suggestions</h3>
+        <p>Our AI recommends creative designs to inspire new products.</p>
+      </div>
+      <div class="feature">
+        <h3>🛒 Eco-Bazaar Marketplace</h3>
+        <p>Showcase, sell, and trade your upcycled products in a marketplace.</p>
+      </div>
+      <div class="feature">
+        <h3>🎓 Learning Hub</h3>
+        <p>Step-by-step tutorials, guides, and workshops for all age groups.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Examples & Tutorials -->
+  <section class="examples" id="examples">
+    <h2>Examples & Tutorials</h2>
+    <div class="example-cards">
+      <div class="card">
+        <h4>💡 Bottle Lamp</h4>
+        <p>Learn how to make lamps from old bottles.</p>
+      </div>
+      <div class="card">
+        <h4>🪑 Tire Chair</h4>
+        <p>Turn old tires into stylish furniture.</p>
+      </div>
+      <div class="card">
+        <h4>📱 E-Waste Jewelry</h4>
+        <p>Craft eco-accessories from electronic waste.</p>
+      </div>
+      <div class="card">
+        <h4>🌿 Plastic Planters</h4>
+        <p>Create beautiful garden planters using discarded plastics.</p>
+      </div>
+      <div class="card">
+        <h4>🧵 Fabric Crafts</h4>
+        <p>Repurpose old clothes into trendy bags and home décor.</p>
+      </div>
+    </div>
+  </section>
+
+ 
+  <!-- Call to Action -->
+  <section class="cta">
+    <h2>Join EcoFusion Today</h2>
+    <p>Be part of a community that turns waste into wonders.</p>
+    <button>Sign Up Now</button>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <p>© 2025 EcoFusion | Innovating for a Greener Tomorrow</p>
+    <p>
+      <a href="#">Facebook</a> | 
+      <a href="#">Instagram</a> | 
+      <a href="#">Twitter</a>
+    </p>
+  </footer>
+
+  <script>
+    // FAQ toggle
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      item.addEventListener('click', () => {
+        item.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>
