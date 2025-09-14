@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoFusion Interactive Help Bot</title>
+<style>
+:root {
+  --green: #27ae60;
+  --blue: #2980b9;
+  --white: #ffffff;
+  --lightblue: #d6eaf8;
+  --darkgreen: #145a32;
+}
+body { margin: 0; font-family: 'Segoe UI', sans-serif; }
+
+/* Floating chat button */
+#chat-toggle {
+  position: fixed; bottom: 20px; right: 20px;
+  background: var(--green); color: white;
+  border: none; border-radius: 50%; width: 60px; height: 60px;
+  font-size: 24px; cursor: pointer;
+  display: flex; justify-content: center; align-items: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); z-index: 1000;
+}
+
+/* Chat panel */
+#chatbot {
+  position: fixed; bottom: 90px; right: 20px;
+  width: 320px; height: 450px; background: var(--white);
+  border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  display: none; flex-direction: column; overflow: hidden; z-index: 1000;
+}
+
+#chat-header {
+  background: var(--green); color: white; padding: 10px;
+  text-align: center; font-weight: bold; position: relative;
+}
+#chat-close { position: absolute; right: 10px; top: 5px; cursor: pointer; font-size: 16px; }
+
+#chat-body { flex: 1; padding: 10px; overflow-y: auto; font-size: 14px; display: flex; flex-direction: column; }
+.msg { margin: 5px 0; padding: 8px 12px; border-radius: 8px; max-width: 80%; word-wrap: break-word; }
+.user { background: var(--lightblue); align-self: flex-end; }
+.bot { background: #f0f0f0; align-self: flex-start; }
+
+#chat-input { display: flex; border-top: 1px solid #ddd; }
+#chat-input input { flex: 1; padding: 10px; border: none; outline: none; }
+#chat-input button { padding: 10px 15px; border: none; background: var(--green); color: white; cursor: pointer; }
+
+/* Bot button links */
+.bot-button {
+  display: inline-block; margin-top: 5px; padding: 5px 10px;
+  background: var(--green); color: white; border-radius: 6px; font-size: 12px;
+  text-decoration: none; cursor: pointer;
+}
+.bot-button:hover { background: var(--darkgreen); }
+</style>
+</head>
+<body>
+
+<button id="chat-toggle">💬</button>
+
+<div id="chatbot">
+  <div id="chat-header">EcoFusion Help Bot <span id="chat-close">✖</span></div>
+  <div id="chat-body">
+    <div class="msg bot">Hi 👋! I’m EcoFusion Bot. You can ask me anything about EcoFusion, like Signup, Login, Marketplace, or Tutorials.</div>
+  </div>
+  <div id="chat-input">
+    <input type="text" id="user-input" placeholder="Type your question..." />
+    <button id="send-btn">➤</button>
+  </div>
+</div>
+
+<script>
+const chatBtn = document.getElementById("chat-toggle");
+const chatPanel = document.getElementById("chatbot");
+const chatClose = document.getElementById("chat-close");
+const chatBody = document.getElementById("chat-body");
+const userInput = document.getElementById("user-input");
+const sendBtn = document.getElementById("send-btn");
+
+// Open/close chat
+chatBtn.addEventListener("click", () => { chatPanel.style.display = "flex"; chatBtn.style.display = "none"; });
+chatClose.addEventListener("click", () => { chatPanel.style.display = "none"; chatBtn.style.display = "flex"; });
+
+// Append message
+function appendMessage(sender, text) {
+  const msg = document.createElement("div");
+  msg.className = `msg ${sender}`;
+  msg.innerHTML = text;
+  chatBody.appendChild(msg);
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+// Bot response logic
+function botResponse(msg) {
+  msg = msg.toLowerCase();
+  let reply = "";
+
+  // Greetings
+  const greetings = ["hi","hello","hey","good morning","good afternoon"];
+  if (greetings.some(g => msg.includes(g))) {
+    reply = "Hello! 👋 How can I assist you today? You can ask about Signup, Login, Marketplace, Tutorials, or Contact.";
+  }
+  // Thanks
+  else if (msg.includes("thanks") || msg.includes("thank you")) {
+    reply = "You're welcome! 😊";
+  }
+  // Farewell
+  else if (msg.includes("bye") || msg.includes("goodbye")) {
+    reply = "Goodbye! Have a great day 🌱";
+  }
+  // Pages
+  else if (msg.includes("signup") || msg.includes("register")) {
+    reply = `You can sign up here: <br><a href="signup.html" class="bot-button">Go to Signup</a>`;
+  }
+  else if (msg.includes("login")) {
+    reply = `Login page is here: <br><a href="login.html" class="bot-button">Go to Login</a>`;
+  }
+  else if (msg.includes("marketplace")) {
+    reply = `Explore Eco-Bazaar: <br><a href="marketplace.html" class="bot-button">Go to Marketplace</a>`;
+  }
+  else if (msg.includes("tutorial")) {
+    reply = `Check our tutorials: <br><a href="tutorials.html" class="bot-button">View Tutorials</a>`;
+  }
+  else if (msg.includes("contact")) {
+    reply = `Contact us here: <br><a href="contact.html" class="bot-button">Contact Page</a>`;
+  }
+  // Fallback
+  else {
+    reply = `I couldn't find an exact answer. You can try searching on Google:<br>
+    <a href="https://www.google.com/search?q=${encodeURIComponent(msg)}" target="_blank" class="bot-button">Search Google</a>`;
+  }
+
+  appendMessage("bot", reply);
+}
+
+// Send message
+function sendMessage() {
+  const msg = userInput.value.trim();
+  if (!msg) return;
+  appendMessage("user", msg);
+  userInput.value = "";
+  setTimeout(() => botResponse(msg), 500);
+}
+
+// Send on Enter
+userInput.addEventListener("keypress", (e) => { if(e.key==="Enter") sendMessage(); });
+sendBtn.addEventListener("click", sendMessage);
+</script>
+
+</body>
+</html>
